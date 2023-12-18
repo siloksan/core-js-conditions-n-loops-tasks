@@ -324,8 +324,54 @@ function getBalanceIndex(arr) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  const getMatrix = (length) => {
+    const matrix = [];
+    for (let i = 0; i < length; i += 1) {
+      matrix[i] = [];
+      for (let j = 0; j < length; j += 1) {
+        matrix[i][j] = 0;
+      }
+    }
+    return matrix;
+  };
+  const spiralMatrix = getMatrix(size);
+  let number = 1;
+  let lengthOfFill = size;
+  let row = 0;
+  let column = 0;
+  while (number <= size ** 2) {
+    while (column < lengthOfFill && number <= size ** 2) {
+      spiralMatrix[row][column] = number;
+      column += 1;
+      number += 1;
+    }
+    column -= 1;
+    lengthOfFill -= 1;
+    while (row < lengthOfFill && number <= size ** 2) {
+      row += 1;
+      spiralMatrix[row][column] = number;
+      number += 1;
+    }
+    lengthOfFill += 1;
+    column -= 1;
+    while (column >= size - lengthOfFill && number <= size ** 2) {
+      spiralMatrix[row][column] = number;
+      number += 1;
+      column -= 1;
+    }
+    column += 1;
+    row -= 1;
+    while (row > size - lengthOfFill && number <= size ** 2) {
+      spiralMatrix[row][column] = number;
+      number += 1;
+      row -= 1;
+    }
+    row += 1;
+    column += 1;
+    lengthOfFill -= 1;
+  }
+  return spiralMatrix;
 }
 
 /**
@@ -342,9 +388,39 @@ function getSpiralMatrix(/* size */) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
+function sortByAsc(arr) {
+  const quickSort = (array, firstIndex, lastIndex) => {
+    if (lastIndex - firstIndex < 1) return array;
+    let pivotIndex = Math.floor((firstIndex + lastIndex) / 2);
+    const pivot = array[pivotIndex];
+    const newArray = array;
+    let indexForLess = firstIndex;
+    let indexForGreater = lastIndex;
+    while (indexForLess <= indexForGreater) {
+      while (newArray[indexForLess] < pivot) {
+        indexForLess += 1;
+      }
+      while (newArray[indexForGreater] > pivot) {
+        indexForGreater -= 1;
+      }
+      if (indexForLess <= indexForGreater) {
+        [newArray[indexForLess], newArray[indexForGreater]] = [
+          newArray[indexForGreater],
+          newArray[indexForLess],
+        ];
+        indexForLess += 1;
+        indexForGreater -= 1;
+      }
+    }
+    pivotIndex = indexForLess;
+    quickSort(newArray, firstIndex, pivotIndex - 1);
+    quickSort(newArray, pivotIndex, lastIndex);
+    return newArray;
+  };
+  return quickSort(arr, 0, arr.length - 1);
 }
+
+// console.log('sortByAsc([-2, 9, 5, -3]): ', sortByAsc([-2, 9, 6, -8, 5, -3]));
 
 /**
  * Shuffles characters in a string so that the characters with an odd index are moved to the end of the string at each iteration.
