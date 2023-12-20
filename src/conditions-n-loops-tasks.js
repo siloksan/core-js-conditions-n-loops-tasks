@@ -450,9 +450,33 @@ function shuffleChar(str, iterations) {
   return shuffleChar(shuffleStr, iterations - 1);
 }
 
-// const str = shuffleChar('01234567', 1);
+// function shuffleChar(str, iterations) {
+//   const shuffleStr = [];
+//   shuffleStr.length = str.length;
+//   function getIndex(length, initialIndex, numberOfShuffle, oddIndex) {
+//     if (numberOfShuffle < 1) return initialIndex;
+//     if (initialIndex % 2 === 0) {
+//       const newIndex = initialIndex / 2;
+//       return getIndex(initialIndex, newIndex, numberOfShuffle - 1, oddIndex);
+//     }
+//     const newIndex = length / 2 + oddIndex;
+//     return getIndex(length, newIndex, numberOfShuffle - 1, oddIndex + 1);
+//   }
+//   let oddIndex = 0;
+//   for (let i = 0; i < str.length; i += 1) {
+//     const index = getIndex(str.length, i, iterations, oddIndex);
+//     shuffleStr[index] = str[i];
+//     if (i % 2 !== 0) {
+//       oddIndex += 1;
+//     }
+//   }
+//   return shuffleStr.join('');
+// }
+// const itter = 1;
 
-// console.log(str, 'index(1): ', str.indexOf('1'));
+// const str = shuffleChar('01234567', itter);
+
+// console.log(str, 'index: ', str.indexOf('1'));
 
 /**
  * Rotates a matrix by 90 degrees clockwise in place.
@@ -469,10 +493,75 @@ function shuffleChar(str, iterations) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
+function rotateMatrix(matrix) {
+  // let lenght = matrix.length;
+  // const rotateArr = matrix;
+  // const tempArray = [...matrix];
+  // for (let i = 0; i < tempArray.length; i += 1) {
+  //   tempArray[i] = [...matrix[i]];
+  //   for (let j = 0; j < tempArray.length; j += 1) {
+  //     [rotateArr[i][j]] = [tempArray[lenght - 1][i]];
+  //     lenght -= 1;
+  //   }
+  //   lenght = matrix.length;
+  // }
+  const rotateArr = matrix;
+  const numberOfSquares = Math.floor(matrix.length / 2);
+  let l = matrix.length - 1;
+  for (let i = 0; i < numberOfSquares; i += 1) {
+    let a = l;
+    for (let j = i; j < matrix.length - i - 1; j += 1) {
+      [rotateArr[i][j], rotateArr[j][l]] = [rotateArr[j][l], rotateArr[i][j]];
+      [rotateArr[i][j], rotateArr[l][a]] = [rotateArr[l][a], rotateArr[i][j]];
+      [rotateArr[i][j], rotateArr[a][i]] = [rotateArr[a][i], rotateArr[i][j]];
+      a -= 1;
+    }
+    l -= 1;
+  }
+  // i = 0, j = 0, l = lenght - 1 = 3, a = lenght - 1 = 3
+  // [rotateArr[i][j], rotateArr[j][l]] = [rotateArr[0][3], rotateArr[0][0]]; //a=0, i=0, j=lenght - 1,
+  // [rotateArr[i][j], rotateArr[l][a]] = [rotateArr[3][3], rotateArr[0][0]];
+  // [rotateArr[i][j], rotateArr[a][i]] = [rotateArr[3][0], rotateArr[0][0]];
+  // // i = 0, j + 1 = 1, l = lenght - 1 = 3, a - 1 = 2------------------------
+  // [rotateArr[i][j], rotateArr[j][l]] = [rotateArr[1][3], rotateArr[0][1]]; //0, i++, lenght - 1
+  // [rotateArr[i][j], rotateArr[l][a]] = [rotateArr[3][2], rotateArr[0][1]];
+  // [rotateArr[i][j], rotateArr[a][i]] = [rotateArr[2][0], rotateArr[0][1]];
+  // // i = 0, j + 1 = 2, l = lenght - 1 = 3, a - 1 = 1----------------------------
+  // [rotateArr[i][j], rotateArr[j][l]] = [rotateArr[2][3], rotateArr[0][2]];
+  // [rotateArr[i][j], rotateArr[l][a]] = [rotateArr[3][1], rotateArr[0][2]];
+  // [rotateArr[i][j], rotateArr[a][i]] = [rotateArr[1][0], rotateArr[0][2]];
+  // // i + 1 = 1, j = i, l - 1 = 2, a = l
+  // [rotateArr[i][j], rotateArr[j][l]] = [rotateArr[1][2], rotateArr[1][1]];
+  // [rotateArr[i][j], rotateArr[l][a]] = [rotateArr[2][2], rotateArr[1][1]];
+  // [rotateArr[i][j], rotateArr[a][i]] = [rotateArr[2][1], rotateArr[1][1]];
+  // ==============================================================================
+  // [rotateArr[0][0], rotateArr[0][3]] = [rotateArr[0][3], rotateArr[0][0]]; //a=0, i=0, j=lenght - 1,
+  // [rotateArr[0][0], rotateArr[3][3]] = [rotateArr[3][3], rotateArr[0][0]];
+  // [rotateArr[0][0], rotateArr[3][0]] = [rotateArr[3][0], rotateArr[0][0]];
+  // // -----------------------------------
+  // [rotateArr[0][1], rotateArr[1][3]] = [rotateArr[1][3], rotateArr[0][1]]; //0, i++, lenght - 1
+  // [rotateArr[0][1], rotateArr[3][2]] = [rotateArr[3][2], rotateArr[0][1]];
+  // [rotateArr[0][1], rotateArr[2][0]] = [rotateArr[2][0], rotateArr[0][1]];
+  // // ---------------------------------------
+  // [rotateArr[0][2], rotateArr[2][3]] = [rotateArr[2][3], rotateArr[0][2]];
+  // [rotateArr[0][2], rotateArr[3][1]] = [rotateArr[3][1], rotateArr[0][2]];
+  // [rotateArr[0][2], rotateArr[1][0]] = [rotateArr[1][0], rotateArr[0][2]];
+  // // ----------------------------------------
+  // [rotateArr[1][1], rotateArr[1][2]] = [rotateArr[1][2], rotateArr[1][1]];
+  // [rotateArr[1][1], rotateArr[2][2]] = [rotateArr[2][2], rotateArr[1][1]];
+  // [rotateArr[1][1], rotateArr[2][1]] = [rotateArr[2][1], rotateArr[1][1]];
+
+  return matrix;
 }
 
+const matrix = [
+  [1, 2, 3, 4],
+  [5, 6, 7, 8],
+  [9, 10, 11, 12],
+  [13, 14, 15, 16],
+];
+
+console.log('matrix =>: ', rotateMatrix(matrix));
 module.exports = {
   isPositive,
   getMaxNumber,
