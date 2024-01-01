@@ -39,7 +39,9 @@ function isPositive(number) {
  *  -0.1, 0, 0.2  => 0.2
  */
 function getMaxNumber(a, b, c) {
-  return Math.max(a, b, c);
+  if (a > b && a > c) return a;
+  if (b > c) return b;
+  return c;
 }
 
 /**
@@ -392,28 +394,40 @@ function getSpiralMatrix(size) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
+function rotateMatrix(matrix) {
+  const rotateArr = matrix;
+  const numberOfSquares = Math.floor(matrix.length / 2);
+  let l = matrix.length - 1;
+  for (let i = 0; i < numberOfSquares; i += 1) {
+    let a = l;
+    for (let j = i; j < matrix.length - i - 1; j += 1) {
+      [rotateArr[i][j], rotateArr[j][l]] = [rotateArr[j][l], rotateArr[i][j]];
+      [rotateArr[i][j], rotateArr[l][a]] = [rotateArr[l][a], rotateArr[i][j]];
+      [rotateArr[i][j], rotateArr[a][i]] = [rotateArr[a][i], rotateArr[i][j]];
+      a -= 1;
+    }
+    l -= 1;
+  }
+  return matrix;
 }
 
-/**
- * Rotates a matrix by 90 degrees clockwise in place.
- * Take into account that the matrix size can be very large. Consider how you can optimize your solution.
- * Usage of String and Array class methods is not allowed in this task.
- *
- * @param {number[][]} matrix - The matrix to rotate.
- * @return {number[][]} The rotated matrix.
- *
- * @example:
- *  [                 [
- *    [1, 2, 3],        [7, 4, 1],
- *    [4, 5, 6],  =>    [8, 5, 2],
- *    [7, 8, 9]         [9, 6, 3]
- *  ]                 ]
- */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
-}
+// const arr = [
+//   [1, 2, 3],
+//   [4, 5, 6],
+//   [7, 8, 9],
+// ];
+
+// const size = 1000;
+
+// for (let i = 0; i < size; i += 1) {
+//   arr.push([]);
+//   for (let j = i * size; j < i * size + size; j += 1) {
+//     arr[i].push(j);
+//   }
+// }
+// rotateMatrix(arr);
+
+// console.log('rotateMatrix(arr): ', rotateMatrix(arr));
 
 /**
  * Sorts an array of numbers in ascending order in place.
@@ -480,44 +494,27 @@ function sortByAsc(arr) {
  */
 
 function shuffleChar(str, iterations) {
-  if (iterations < 1) return str;
-  let shuffleStr = '';
-  for (let i = 0; i < str.length; i += 2) {
-    shuffleStr += str[i];
+  const cash = {};
+  let j = iterations;
+  let string = str;
+  while (j > 0) {
+    if (cash[string]) {
+      string = cash[string];
+    } else {
+      let shuffleStr = '';
+      for (let i = 0; i < string.length; i += 2) {
+        shuffleStr += string[i];
+      }
+      for (let i = 1; i < string.length; i += 2) {
+        shuffleStr += string[i];
+      }
+      cash[string] = shuffleStr;
+      string = shuffleStr;
+    }
+    j -= 1;
   }
-  for (let i = 1; i < str.length; i += 2) {
-    shuffleStr += str[i];
-  }
-  return shuffleChar(shuffleStr, iterations - 1);
+  return string;
 }
-
-// function shuffleChar(str, iterations) {
-//   const shuffleStr = [];
-//   shuffleStr.length = str.length;
-//   function getIndex(length, initialIndex, numberOfShuffle, oddIndex) {
-//     if (numberOfShuffle < 1) return initialIndex;
-//     if (initialIndex % 2 === 0) {
-//       const newIndex = initialIndex / 2;
-//       return getIndex(initialIndex, newIndex, numberOfShuffle - 1, oddIndex);
-//     }
-//     const newIndex = length / 2 + oddIndex;
-//     return getIndex(length, newIndex, numberOfShuffle - 1, oddIndex + 1);
-//   }
-//   let oddIndex = 0;
-//   for (let i = 0; i < str.length; i += 1) {
-//     const index = getIndex(str.length, i, iterations, oddIndex);
-//     shuffleStr[index] = str[i];
-//     if (i % 2 !== 0) {
-//       oddIndex += 1;
-//     }
-//   }
-//   return shuffleStr.join('');
-// }
-// const itter = 1;
-
-// const str = shuffleChar('01234567', itter);
-
-// console.log(str, 'index: ', str.indexOf('1'));
 
 /**
  * Returns the nearest largest integer consisting of the digits of the given positive integer.
@@ -525,39 +522,21 @@ function shuffleChar(str, iterations) {
  * Usage of String class methods is not allowed in this task.
  *
  * @example:
- *  [                 [
- *    [1, 2, 3],        [7, 4, 1],
- *    [4, 5, 6],  =>    [8, 5, 2],
- *    [7, 8, 9]         [9, 6, 3]
- *  ]                 ]
+ * 12345    => 12354
+ * 123450   => 123504
+ * 12344    => 12434
+ * 123440   => 124034
+ * 1203450  => 1203504
+ * 90822    => 92028
+ * 321321   => 322113
+ *
+ * @param {number} number The source number
+ * @returns {number} The nearest larger number, or original number if none exists.
  */
-function rotateMatrix(matrix) {
-  // let lenght = matrix.length;
-  // const rotateArr = matrix;
-  // for (let i = 0; i < matrix.length; i += 1) {
-  //   rotateArr[i] = [];
-  //   for (let j = 0; j < matrix.length; j += 1) {
-  //     [rotateArr[i][j]] = [matrix[lenght - 1][i]];
-  //     lenght -= 1;
-  //   }
-  //   lenght = matrix.length;
-  // }
-  // return matrix;
-  const rotateArr = matrix;
-  const numberOfSquares = Math.floor(matrix.length / 2);
-  let l = matrix.length - 1;
-  for (let i = 0; i < numberOfSquares; i += 1) {
-    let a = l;
-    for (let j = i; j < matrix.length - i - 1; j += 1) {
-      [rotateArr[i][j], rotateArr[j][l]] = [rotateArr[j][l], rotateArr[i][j]];
-      [rotateArr[i][j], rotateArr[l][a]] = [rotateArr[l][a], rotateArr[i][j]];
-      [rotateArr[i][j], rotateArr[a][i]] = [rotateArr[a][i], rotateArr[i][j]];
-      a -= 1;
-    }
-    l -= 1;
-  }
-  return matrix;
+function getNearestBigger(/* number */) {
+  throw new Error('Not implemented');
 }
+
 module.exports = {
   isPositive,
   getMaxNumber,
