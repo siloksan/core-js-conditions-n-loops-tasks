@@ -496,15 +496,15 @@ function shuffleChar(str, iterations) {
 function rotateMatrix(matrix) {
   // let lenght = matrix.length;
   // const rotateArr = matrix;
-  // const tempArray = [...matrix];
-  // for (let i = 0; i < tempArray.length; i += 1) {
-  //   tempArray[i] = [...matrix[i]];
-  //   for (let j = 0; j < tempArray.length; j += 1) {
-  //     [rotateArr[i][j]] = [tempArray[lenght - 1][i]];
+  // for (let i = 0; i < matrix.length; i += 1) {
+  //   rotateArr[i] = [];
+  //   for (let j = 0; j < matrix.length; j += 1) {
+  //     [rotateArr[i][j]] = [matrix[lenght - 1][i]];
   //     lenght -= 1;
   //   }
   //   lenght = matrix.length;
   // }
+  // return matrix;
   const rotateArr = matrix;
   const numberOfSquares = Math.floor(matrix.length / 2);
   let l = matrix.length - 1;
@@ -518,50 +518,9 @@ function rotateMatrix(matrix) {
     }
     l -= 1;
   }
-  // i = 0, j = 0, l = lenght - 1 = 3, a = lenght - 1 = 3
-  // [rotateArr[i][j], rotateArr[j][l]] = [rotateArr[0][3], rotateArr[0][0]]; //a=0, i=0, j=lenght - 1,
-  // [rotateArr[i][j], rotateArr[l][a]] = [rotateArr[3][3], rotateArr[0][0]];
-  // [rotateArr[i][j], rotateArr[a][i]] = [rotateArr[3][0], rotateArr[0][0]];
-  // // i = 0, j + 1 = 1, l = lenght - 1 = 3, a - 1 = 2------------------------
-  // [rotateArr[i][j], rotateArr[j][l]] = [rotateArr[1][3], rotateArr[0][1]]; //0, i++, lenght - 1
-  // [rotateArr[i][j], rotateArr[l][a]] = [rotateArr[3][2], rotateArr[0][1]];
-  // [rotateArr[i][j], rotateArr[a][i]] = [rotateArr[2][0], rotateArr[0][1]];
-  // // i = 0, j + 1 = 2, l = lenght - 1 = 3, a - 1 = 1----------------------------
-  // [rotateArr[i][j], rotateArr[j][l]] = [rotateArr[2][3], rotateArr[0][2]];
-  // [rotateArr[i][j], rotateArr[l][a]] = [rotateArr[3][1], rotateArr[0][2]];
-  // [rotateArr[i][j], rotateArr[a][i]] = [rotateArr[1][0], rotateArr[0][2]];
-  // // i + 1 = 1, j = i, l - 1 = 2, a = l
-  // [rotateArr[i][j], rotateArr[j][l]] = [rotateArr[1][2], rotateArr[1][1]];
-  // [rotateArr[i][j], rotateArr[l][a]] = [rotateArr[2][2], rotateArr[1][1]];
-  // [rotateArr[i][j], rotateArr[a][i]] = [rotateArr[2][1], rotateArr[1][1]];
-  // ==============================================================================
-  // [rotateArr[0][0], rotateArr[0][3]] = [rotateArr[0][3], rotateArr[0][0]]; //a=0, i=0, j=lenght - 1,
-  // [rotateArr[0][0], rotateArr[3][3]] = [rotateArr[3][3], rotateArr[0][0]];
-  // [rotateArr[0][0], rotateArr[3][0]] = [rotateArr[3][0], rotateArr[0][0]];
-  // // -----------------------------------
-  // [rotateArr[0][1], rotateArr[1][3]] = [rotateArr[1][3], rotateArr[0][1]]; //0, i++, lenght - 1
-  // [rotateArr[0][1], rotateArr[3][2]] = [rotateArr[3][2], rotateArr[0][1]];
-  // [rotateArr[0][1], rotateArr[2][0]] = [rotateArr[2][0], rotateArr[0][1]];
-  // // ---------------------------------------
-  // [rotateArr[0][2], rotateArr[2][3]] = [rotateArr[2][3], rotateArr[0][2]];
-  // [rotateArr[0][2], rotateArr[3][1]] = [rotateArr[3][1], rotateArr[0][2]];
-  // [rotateArr[0][2], rotateArr[1][0]] = [rotateArr[1][0], rotateArr[0][2]];
-  // // ----------------------------------------
-  // [rotateArr[1][1], rotateArr[1][2]] = [rotateArr[1][2], rotateArr[1][1]];
-  // [rotateArr[1][1], rotateArr[2][2]] = [rotateArr[2][2], rotateArr[1][1]];
-  // [rotateArr[1][1], rotateArr[2][1]] = [rotateArr[2][1], rotateArr[1][1]];
-
   return matrix;
 }
 
-const matrix = [
-  [1, 2, 3, 4],
-  [5, 6, 7, 8],
-  [9, 10, 11, 12],
-  [13, 14, 15, 16],
-];
-
-console.log('matrix =>: ', rotateMatrix(matrix));
 module.exports = {
   isPositive,
   getMaxNumber,
