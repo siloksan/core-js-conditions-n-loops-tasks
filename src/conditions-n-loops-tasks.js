@@ -26,7 +26,7 @@ function isPositive(number) {
 }
 
 /**
- * Returns the maximum of three numbers without using Array class methods.
+ * Returns the maximum of three numbers without using Array and Math classes methods.
  *
  * @param {number} a - The first number.
  * @param {number} b - The second number.
@@ -88,6 +88,7 @@ function canQueenCaptureKing(queen, king) {
 
 /**
  * Determines whether a triangle is isosceles based on its side lengths.
+ * In this task, the use of methods of the String and Array classes is not allowed.
  *
  * @param {number} a - The length of the first side.
  * @param {number} b - The length of the second side.
@@ -113,6 +114,7 @@ function isIsoscelesTriangle(a, b, c) {
 
 /**
  * Converts a number to Roman numerals. The number will be between 1 and 39.
+ * In this task, the use of methods of the String and Array classes is not allowed.
  *
  * @param {number} num - The number to convert.
  * @return {string} The Roman numeral representation of the number.
@@ -150,6 +152,7 @@ function convertToRomanNumerals(num) {
 
 /**
  * Converts a number to a string, replacing digits with words.
+ * In this task, the use of methods of the String and Array classes is not allowed.
  *
  * @param {string} numberStr - The number as a string.
  * @return {string} The number with digits replaced by words.
@@ -280,7 +283,7 @@ function isContainNumber(num, digit) {
 /**
  * Finds the index of an element in an array where the sum of elements to the left equals the sum of elements to the right.
  * If such an index does not return -1.
- * In this task, the use of methods of the Array class is not allowed.
+ * In this task, the use of methods of the Array and String classes is not allowed.
  *
  * @param {number[]} arr - The array to check.
  * @return {number} The index of the balance point, or -1 if none exists.
@@ -372,6 +375,44 @@ function getSpiralMatrix(size) {
     lengthOfFill -= 1;
   }
   return spiralMatrix;
+}
+
+/**
+ * Rotates a matrix by 90 degrees clockwise in place.
+ * Take into account that the matrix size can be very large. Consider how you can optimize your solution.
+ * Usage of String and Array class methods is not allowed in this task.
+ *
+ * @param {number[][]} matrix - The matrix to rotate.
+ * @return {number[][]} The rotated matrix.
+ *
+ * @example:
+ *  [                 [
+ *    [1, 2, 3],        [7, 4, 1],
+ *    [4, 5, 6],  =>    [8, 5, 2],
+ *    [7, 8, 9]         [9, 6, 3]
+ *  ]                 ]
+ */
+function rotateMatrix(/* matrix */) {
+  throw new Error('Not implemented');
+}
+
+/**
+ * Rotates a matrix by 90 degrees clockwise in place.
+ * Take into account that the matrix size can be very large. Consider how you can optimize your solution.
+ * Usage of String and Array class methods is not allowed in this task.
+ *
+ * @param {number[][]} matrix - The matrix to rotate.
+ * @return {number[][]} The rotated matrix.
+ *
+ * @example:
+ *  [                 [
+ *    [1, 2, 3],        [7, 4, 1],
+ *    [4, 5, 6],  =>    [8, 5, 2],
+ *    [7, 8, 9]         [9, 6, 3]
+ *  ]                 ]
+ */
+function rotateMatrix(/* matrix */) {
+  throw new Error('Not implemented');
 }
 
 /**
@@ -479,12 +520,9 @@ function shuffleChar(str, iterations) {
 // console.log(str, 'index: ', str.indexOf('1'));
 
 /**
- * Rotates a matrix by 90 degrees clockwise in place.
- * Take into account that the matrix size can be very large. Consider how you can optimize your solution.
- * Usage of String and Array class methods is not allowed in this task.
- *
- * @param {number[][]} matrix - The matrix to rotate.
- * @return {number[][]} The rotated matrix.
+ * Returns the nearest largest integer consisting of the digits of the given positive integer.
+ * If there is no such number, it returns the original number.
+ * Usage of String class methods is not allowed in this task.
  *
  * @example:
  *  [                 [
@@ -520,7 +558,6 @@ function rotateMatrix(matrix) {
   }
   return matrix;
 }
-
 module.exports = {
   isPositive,
   getMaxNumber,
@@ -533,7 +570,8 @@ module.exports = {
   isContainNumber,
   getBalanceIndex,
   getSpiralMatrix,
+  rotateMatrix,
   sortByAsc,
   shuffleChar,
-  rotateMatrix,
+  getNearestBigger,
 };
