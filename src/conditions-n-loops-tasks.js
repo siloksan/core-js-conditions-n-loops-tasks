@@ -567,7 +567,6 @@ function getNearestBigger(number) {
   return [...resultArr, ...arrLastNumbers].join('') * 1;
 }
 
-console.log('getNearestBigger(123450): ', getNearestBigger(123450));
 module.exports = {
   isPositive,
   getMaxNumber,
